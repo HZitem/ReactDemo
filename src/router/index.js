@@ -24,12 +24,8 @@ const RootRouter = () => (
                     if( ['/reduxPage'].indexOf(r.key) !== -1){
                         const route = r => {
                             return (
-                                <Route key={r.key} exact path={r.key}
-                                render={
-                                    props => {
-                                        return <r.component {...props}/>
-                                    }
-                                }
+                                <RrivateRoute key={r.key} exact path={r.key}
+                                component={r.component}
                             />
                             )
                         }
