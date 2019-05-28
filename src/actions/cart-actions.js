@@ -3,7 +3,6 @@ export const UPDATE_CART = 'UPDATE_CART';
 export const DELETE_FROM_CART = 'DELETE_FROM_CART';
 
 export function addTo(data){
-  console.log(data)
     return {
         type:ADD_TO_CART,
         payload:{name:data}

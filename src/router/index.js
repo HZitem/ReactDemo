@@ -43,6 +43,6 @@ const RootRouter = () => (
         </Switch> 
     </div> 
 </HashRouter>
-                        )
+)
                         
 export default RootRouter;

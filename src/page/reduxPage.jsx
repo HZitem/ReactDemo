@@ -1,34 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import store from '../store'
-import { addTo }  from '../actions/cart-actions';
-class reduxPage extends Component {
-  constructor(){
+import store from '../store';
+import {addTo} from '../actions/cart-actions';
+
+class reduxPage extends Component{
+  constructor (){
     super();
     this.state = {}
   };
   add(){
-    store.dispatch(addTo('testname')); 
+    store.dispatch(addTo('testname'));
   }
-  render() {
+  render(){
     return (
       <div className="Login">
         <p>Redux Page</p>
         <ul>
-          {this.props.list.map((item, index) =>
+          {this.props.list.map((item,index) =>
             <li key={index}>{item.name}</li>
-          )}
+         )}
         </ul>
         <button onClick={this.add.bind(this)}>Add</button>
       </div>
-    );
+    )
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state){
   return {
-      list: state.shoppingCart.cart
+    list:state.shoppingCart.cart
   }
 }
 
-export default reduxPage = connect(mapStateToProps)(reduxPage)
+export default reduxPage = connect(mapStateToProps)(reduxPage);
