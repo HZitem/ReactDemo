@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import store from '../store';
-import {addTo} from '../actions/cart-actions';
+import {addTo,ajaxList} from '../actions/cart-actions';
 
 class reduxPage extends Component{
   constructor (){
@@ -11,16 +11,28 @@ class reduxPage extends Component{
   add(){
     store.dispatch(addTo('testname'));
   }
+  test(){
+    store.dispatch(ajaxList());
+  }
   render(){
+    let obj = this.props.test;//是否已经正确异步到数据
+    let ul = null;
+    if(obj){
+       ul = <ul>{this.props.test.map((item,index) =><li key={index}>{item.name}</li>)}</ul>;
+    }else{
+      ul = <p>Error</p>
+    }
     return (
       <div className="Login">
         <p>Redux Page</p>
+        {ul}
         <ul>
           {this.props.list.map((item,index) =>
             <li key={index}>{item.name}</li>
          )}
         </ul>
         <button onClick={this.add.bind(this)}>Add</button>
+        <button onClick={this.test.bind(this)}>Test Redux Ajax</button>
       </div>
     )
   }
@@ -28,7 +40,8 @@ class reduxPage extends Component{
 
 function mapStateToProps(state){
   return {
-    list:state.shoppingCart.cart
+    list:state.shoppingCart.cart,
+    test:state.shoppingCart.test
   }
 }
 

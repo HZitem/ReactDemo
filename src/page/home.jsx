@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import {TotalTemplate} from '../api'
 function About() {
   return (
     <div>About</div>
@@ -18,11 +17,7 @@ class Home extends Component {
       ]
     };
   };
-  componentWillMount(){
-    TotalTemplate().then(res=>{
-      console.log(res.data)
-    })
-  }
+
   render() {
     return (
       <div className="Login">

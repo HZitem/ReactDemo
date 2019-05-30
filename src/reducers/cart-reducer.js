@@ -1,4 +1,4 @@
-import  { ADD_TO_CART,DELETE_FROM_CART}  from '../actions/cart-actions';
+import  { ADD_TO_CART,DELETE_FROM_CART,GET_AJAX_LIST}  from '../actions/cart-actions';
 
 const initialState = {
   cart: [
@@ -6,12 +6,12 @@ const initialState = {
       name: 'mik',
     },
     {
-      name: 'ubnt',
-    
+      name: 'ubnt',    
     }
   ],
-  
+  test:[]
 }
+
 
 export default function(state=initialState, action) {
   switch (action.type) {
@@ -26,7 +26,19 @@ export default function(state=initialState, action) {
         cart: state.cart.filter((item,index) => index !== action.payload.index)
       }
     }
-
+    case GET_AJAX_LIST: {
+      if(action.action.data!==undefined){
+        return {
+          ...state,
+          test: action.action.data.list
+        }
+      }else{
+        return {
+          ...state,
+          test: null
+        }
+      }
+    }
     default:
       return state;
   }

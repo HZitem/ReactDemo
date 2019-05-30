@@ -10,6 +10,7 @@ import login from '../page/login';
 import Home from '../page/home';
 import config from './config'
 
+
 class Welcome extends React.Component {
     render() {
       return <h1>404</h1>;
@@ -26,7 +27,7 @@ const RootRouter = () => (
                             return (
                                 <RrivateRoute key={r.key} exact path={r.key}
                                 component={r.component}
-                            />
+                                />
                             )
                         }
                         return route(r) ;
