@@ -16,12 +16,13 @@ class Home extends Component {
         { name: "Nested Route", url: "/ParentRouter" },
       ]
     };
+    this.myRef = React.createRef();
   };
-
+  
   render() {
     return (
       <div className="Login">
-        <p>Home</p>
+        <p ref={this.myRef}>Home</p>
         <ul>
           {this.state.list.map((item, index) =>
             <li key={index}>
