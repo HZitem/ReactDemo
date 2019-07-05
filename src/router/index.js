@@ -1,10 +1,11 @@
-import React from 'react';
+import React  from 'react';
 import {
     HashRouter,
     Route,
     Switch,
     Redirect
 } from 'react-router-dom'
+
 import RrivateRoute from '../PrivateRoute'
 import login from '../page/login';
 import Home from '../page/home';
@@ -16,19 +17,20 @@ class Welcome extends React.Component {
       return <h1>404</h1>;
     }
   }
-
+const path = ['/reduxPage','/ParentRouter/','/ParentRouter/kidRouter1','/ParentRouter','/ParentRouter/kidRouter2']
+  
 const RootRouter = () => (
 <HashRouter >
-    <div className="App" >
+<div className="App" >
         <Switch > {
-                config['menus'].map(r => {
-                    if( ['/reduxPage'].indexOf(r.key) !== -1){
+                config['menus'].map((r,key) => {
+                    if( path.indexOf(r.path) !== -1){
                         const route = r => {
                             return (
-                                <RrivateRoute key={r.key} exact path={r.key}
-                                component={r.component}
+                                <RrivateRoute key={key}  path={r.path}
+                                    component={r.component} routes={r.routes}
                                 />
-                            )
+                            )                     
                         }
                         return route(r) ;
                     }else{

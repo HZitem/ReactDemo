@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
-import {
-    Route, Link, HashRouter as Router
-} from 'react-router-dom'
+import RrivateRoute from '../PrivateRoute'
+import { Link } from "react-router-dom";
+
 class ParentRouter extends Component {
     render() {
-        let url = this.props.path;
         return (
-            <Router>
                 <div className="ParentRouter">
-                    <Link to={`${url}`}>ParentRouter</Link>
+                    <Link to='/'>home</Link>
+                    <br />
+                        {
+                            this.props.routes.map((route,key)=>{
+                                return  (<div key={key}><Link  to={route.path}>{route.title}</Link></div>)
+                            })
+                        }
+                    <p>嵌套路由视图</p>
+                    <div>
+                        {
+                            this.props.routes.map((route,key)=>{
+                                return  <RrivateRoute key={key} exact path={route.path} component={route.component} />
+                            })
+                        }
+                        
+                    </div>
                 </div>
-                <Link to={`${url}/kidRouter1`}>kidRouter 1</Link>
-                <br />
-                <Link to={`${url}/kidRouter2`}>kidRouter 2</Link>
-                <Route exact path={`${url}/kidRouter1`}render={() => <h3>kidRouter 1 </h3>} />
-                <Route exact path={`${url}/kidRouter2`} render={() => <h3>kidRouter 2 </h3>} />
-            </Router>
         );
+    };
+    componentDidMount(){
+        // console.log(this.props.routes)
     }
 }
 
