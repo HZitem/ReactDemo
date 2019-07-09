@@ -36,7 +36,6 @@ const RootRouter = () => (
                     }else{
                         return []
                     }
-                    
                 })
             } 
             <Route exact path="/login" component={login}/> 
