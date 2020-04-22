@@ -8,8 +8,11 @@ import {
 import RrivateRoute from '../PrivateRoute'
 import login from '../page/login';
 import Home from '../page/home';
+import hookDemo from '../page/hookDemo';
 import config from './config'
-
+import { connect } from 'react-redux';
+import store from '../store';
+import {initMenusAction} from '../actions/user-actions';
 
 class Welcome extends React.Component {
     render() {
@@ -17,12 +20,14 @@ class Welcome extends React.Component {
     }
   }
 
-const RootRouter = () => (
+// const userRoles =  ['/reduxPage','/ParentRouter'];
+store.dispatch(initMenusAction('role'));
+let RootRouter = (e) => (
 <HashRouter >
     <div className="App" >
         <Switch > {
                 config['menus'].map(r => {
-                    if( ['/reduxPage'].indexOf(r.key) !== -1){
+                    if( e.menus.indexOf(r.key) !== -1){
                         const route = r => {
                             return (
                                 <RrivateRoute key={r.key} exact path={r.key}
@@ -38,6 +43,7 @@ const RootRouter = () => (
                 })
             } 
             <Route exact path="/login" component={login}/> 
+            <Route exact path="/hookDemo" component={hookDemo}/> 
             <Route exact path="/404" component={Welcome}/> 
             <RrivateRoute exact path="/" component={Home}/>   
             <Route render={() => <Redirect to="/404" />} />             
@@ -45,5 +51,14 @@ const RootRouter = () => (
     </div> 
 </HashRouter>
 )
-                        
+
+
+
+function mapStateToProps(state){
+    return {
+        menus:state.userReducer.user.menus,
+        test:state.userReducer.user.test,
+    }
+  }   
+  RootRouter = connect(mapStateToProps)(RootRouter)      
 export default RootRouter;
