@@ -3,9 +3,17 @@ import { connect } from 'react-redux';
 import store from '../store';
 import {addTo,ajaxList} from '../actions/cart-actions';
 
-class reduxPage extends Component{
-  constructor (){
-    super();
+interface State {
+
+} 
+interface Props {
+  test: any;
+  list: any[];
+} 
+
+class reduxPage extends Component<Props,State>{
+  constructor (props){
+    super(props);
     this.state = {}
   };
   add(){
@@ -38,11 +46,11 @@ class reduxPage extends Component{
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state:any){
   return {
     list:state.shoppingCart.cart,
     test:state.shoppingCart.test
   }
 }
 
-export default reduxPage = connect(mapStateToProps)(reduxPage);
+export default connect(mapStateToProps)(reduxPage);

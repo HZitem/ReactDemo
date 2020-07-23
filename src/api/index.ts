@@ -8,9 +8,9 @@ service.interceptors.response.use(// response 拦截器
   response => {
         return response.data
   },
-  error => {
+  (error:any) => {
    console.log('error')
   }
 )
 
-export const TotalTemplate = data => service.post('/template',data)
+export const TotalTemplate = (data:any) => service.post('/template',data)

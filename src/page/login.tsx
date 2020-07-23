@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
+interface State {
+  isLogin:boolean|any;
+} 
+interface Props {
+  history: any;
+}
 
-class Login extends Component {
-  constructor() {
-    super();
+class Login extends Component<Props,State> {
+  constructor(props) {
+    super(props);
     this.state = {
       isLogin: localStorage.getItem('loginState'),
     }
   };
   handleClick() {
-    localStorage.setItem('loginState', 1);
+    localStorage.setItem('loginState', "1");
     this.props.history.push({
       pathname: '/'
     })

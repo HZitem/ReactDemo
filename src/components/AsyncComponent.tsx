@@ -1,10 +1,13 @@
 import React, {
     Component
 } from "react";
+interface State {
+    component:any
+} 
 
-export default function asyncComponent(importComponent) {
-    class AsyncComponent extends Component {
-        constructor(props) {
+export default function asyncComponent(importComponent:any) {
+    class AsyncComponent extends Component<{},State> {
+        constructor(props:any) {
             super(props);
             this.state = {
                 component: null

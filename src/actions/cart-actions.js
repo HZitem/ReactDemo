@@ -1,6 +1,6 @@
 import {
   TotalTemplate
-} from '../api/index'
+} from '../api/index.ts'
 
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const UPDATE_CART = 'UPDATE_CART';
@@ -24,7 +24,7 @@ export function addTo(data) {
 
 export const ajaxList = () => {
   return (dispatch) => {
-    TotalTemplate().then(res => {
+    TotalTemplate({}).then((res) => {
       let data = {data:res.data,type:true}
       const action = initListAction(data)
       dispatch(action)

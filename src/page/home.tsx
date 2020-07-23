@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Modal} from 'antd';
 import config from '../router/config'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
@@ -8,7 +9,17 @@ function About() {
     <div>About</div>
   );
 }
-class Home extends Component {
+
+interface State {
+  list: any;
+  loginState:boolean|any;
+  myRef:any
+} 
+interface Props {
+  menus: any;
+} 
+
+class Home extends Component<Props,State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,9 +29,9 @@ class Home extends Component {
         { title: "Redux Page", key: "/reduxPage" },
         { title: "Nested Route", key: "/ParentRouter" },
         { title: "hook Demo", key: "/hookDemo" },
-      ]
+      ],
+      myRef:React.createRef()
     };
-    this.myRef = React.createRef();
   };
 
   componentDidMount(){
@@ -36,12 +47,14 @@ class Home extends Component {
     this.setState({
       list:nes
     })
-    
+    // Modal.success({
+    //   title: '加载成功!',
+    // });
   };
   render() {
     return (
       <div className="Login">
-        <p ref={this.myRef}>Home</p>
+        <p ref={this.state.myRef}>Home</p>
         <ul>
           {this.state.list.map((item, index) =>
             <li key={index}>
