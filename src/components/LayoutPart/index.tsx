@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
 import config from '../../router/config'
-import {Link} from 'react-router-dom'
+import RrivateRoute from '../../PrivateRoute.js'
+import {
+  HashRouter,
+  withRouter,
+  Link,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom'
 import { connect } from 'react-redux';
+
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -17,6 +26,12 @@ interface Props {
   children: any,
   path: String;
 }
+class Welcome extends React.Component {
+  render() {
+    return <h1>404</h1>;
+  }
+}
+
 
 class TestLayout extends Component<Props, {}> {
   state = {
@@ -53,7 +68,7 @@ class TestLayout extends Component<Props, {}> {
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
             {this.state.list.map((item, index) =>
               <Menu.Item key={index}>
-                <Link to={item.key}>{item.title}</Link>
+                <Link to={`${item.key}`}>{item.title}</Link>
               </Menu.Item>
             )}
           </Menu>
@@ -73,7 +88,15 @@ class TestLayout extends Component<Props, {}> {
               minHeight: 280,
             }}
           >
-            {this.props.children}
+            <Switch >
+              {
+             config.menus.map((item, index) => {
+                return <Route key={index} exact path={item.key} component={item.component} />
+              })
+              }
+              <Route path="/404" component={Welcome} />
+              <Redirect to="/404" />
+            </Switch >
           </Content>
         </Layout>
       </Layout>

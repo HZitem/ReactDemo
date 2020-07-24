@@ -16,6 +16,9 @@ class reduxPage extends Component<Props,State>{
     super(props);
     this.state = {}
   };
+  componentDidMount() {
+    console.log("run")
+  }
   add(){
     store.dispatch(addTo('testname'));
   }

@@ -5,9 +5,8 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom'
-import RrivateRoute from '../PrivateRoute.js'
+
 import login from '../page/login.tsx';
-import Home from '../page/home.tsx';
 import LayoutPart from '../components/LayoutPart/index.tsx';
 import config from './config.js'
 import { connect } from 'react-redux';
@@ -26,24 +25,8 @@ let RootRouter = (e) => (
   <HashRouter >
     <div className="App" >
       <Switch >
-        <Route exact path="/login" component={login} />
-        <Route exact path="/404" component={Welcome} />
-        <RrivateRoute exact path="/home" component={Home} />
-        <Route exact path="/" render={() => <Redirect to="/home" />} />
-        {
-          <LayoutPart>
-            {config['menus'].map((r, i) => {
-              return (
-                <RrivateRoute key={i} exact path={r.key}
-                  component={r.component}
-                />
-              )
-            })}
-            
-          </LayoutPart>
-        }
-        <Route render={() => <Redirect to="/404" />} />
-
+        <Route path="/login" component={login} />
+        <Route path="/" component={LayoutPart} />    
       </Switch>
     </div>
   </HashRouter>
